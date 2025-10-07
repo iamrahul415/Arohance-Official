@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { useScroll, useTransform, motion } from "framer-motion";
 
 
@@ -43,7 +44,7 @@ const worksData = [
       "https://images.unsplash.com/photo-1558618666-fbd62c73cd3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
     ],
     websiteUrl: "https://tuktuk.com",
-    bgGradient: "from-blue-900 via-blue-700 to-blue-500"
+    bgGradient: "from-gray-900 via-gray-800 to-black"
   },
   {
     id: 4,
@@ -69,7 +70,7 @@ const worksData = [
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
     ],
     websiteUrl: "https://kuchbhi.com",
-    bgGradient: "from-indigo-900 via-purple-700 to-blue-600"
+    bgGradient: "from-gray-900 via-gray-800 to-black"
   }
 ];
 

@@ -7,22 +7,24 @@ function HeroSection() {
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
-      {/* Background video (always playing) */}
+      {/* Background video (only in hero section) */}
       <video
         ref={videoRef}
-        className="fixed w-full h-full object-cover filter grayscale"
+        className="absolute top-0 left-0 w-full h-full object-cover filter grayscale"
         autoPlay
         loop
         muted
         playsInline
       >
-        {/* Video from public folder */}
         <source src="/assets/backgroundvideo.mp4" type="video/mp4" />
       </video>
 
-      <section className="h-screen w-full text-white">
+      {/* Dark overlay for better text visibility */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
+
+      <section className="relative h-screen w-full text-white">
         {/* Top-right: Paragraph + CTA */}
-        <div className="absolute top-30 right-5 max-w-md text-right">
+        <div className="absolute top-40 right-5 max-w-md text-right">
           <p
             className="text-lg leading-relaxed mb-6"
             style={{ fontFamily: "Clash Display" }}
@@ -59,7 +61,7 @@ function HeroSection() {
               lineHeight: "1",
             }}
           >
-            Empowering your <br/> Business
+            Empowering your <br /> Business
           </h1>
         </div>
 

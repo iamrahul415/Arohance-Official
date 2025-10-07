@@ -1,102 +1,66 @@
-import React, { useState } from "react";
-import { Menu, X } from "lucide-react";
-// eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from "framer-motion";
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  // Nav links animation
-  const linkVariants = {
-    hidden: { x: -50, opacity: 0 },
-    visible: (i) => ({
-      x: 0,
-      opacity: 1,
-      transition: { delay: i * 0.1 },
-    }),
-  };
+function Navbar() {
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'About Us', path: '/about' },
+    { name: 'Services', path: '/services' },
+    { name: 'Case Study', path: '/case-study' },
+    { name: 'Reviews', path: '/reviews' },
+    { name: 'FAQ', path: '/faq' },
+  ];
 
   return (
-    <nav className="w-full fixed top-0 left-0 z-70 bg-transparent px-6 py-4 flex justify-between items-center">
-     
-      {/* Logo */}
-      <img
-        className="logo"
-        src="./assets/Logo.svg"
-        alt="companyLogo"
-        width={95}
-        height={95}
-      />
-
-      {/* Hamburger */}
-      <button onClick={() => setIsOpen(true)} className="text-3xl z-[60] cursor-pointer">
-        <Menu size={32} />
-      </button>
-
-      {/* Fullscreen Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="fixed inset-0 bg-[#233d4d] text-white flex flex-col"
-            initial={{ x: "100%" }}     // start off-screen (right)
-            animate={{ x: 0 }}          // slide in
-            exit={{ x: "100%" }}        // slide out (return right)
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          >
-            {/* Close Button */}
-            <div className="flex justify-end p-6 cursor-pointer">
-              <button onClick={() => setIsOpen(false)}>
-                <X size={32} />
-              </button>
-            </div>
-
-            {/* Links - Left Column */}
-            <div className="flex flex-1">
-              <div className="flex flex-col gap-8 text-3xl font-semibold px-12 py-10">
-                {["HOME", "ABOUT", "WORKS", "REVIEWS", "CONTACT"].map(
-                  (item, i) => (
-                    <motion.a
-                      key={item}
-                      href={`#${item.toLowerCase()}`}
-                      className="hover:text-[#fe7f23] transition"
-                      custom={i}
-                      variants={linkVariants}
-                      initial="hidden"
-                      animate="visible"
-                      exit="hidden"
-                    >
-                      {item}
-                    </motion.a>
-                  )
-                )}
-              </div>
-            </div>
-
-            {/* Footer Socials */}
-            <motion.div
-              className="w-full p-6 border-t border-[#fe7f23] flex justify-center gap-4"
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 50, opacity: 0 }}
-              transition={{ delay: 0.2 }}
+    <nav className="fixed top-0 left-0 right-0 z-50 px-8 py-6 ">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Logo - Left */}
+        <div className="flex items-center">
+          <svg className="w-32 h-8" viewBox="0 0 120 30" fill="none">
+            <text
+              x="0"
+              y="22"
+              fill="white"
+              fontSize="24"
+              fontWeight="bold"
+              fontFamily="Arial, sans-serif"
             >
-              {["INSTAGRAM", "TWITTER", "LINKEDIN", "YOUTUBE"].map((social) => (
-                <motion.a
-                  key={social}
-                  href="#"
-                  className="px-4 py-2 border border-gray-500 rounded-md hover:bg-[#fe7f23] hover:text-black transition"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {social}
-                </motion.a>
-              ))}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              Aroahnce
+            </text>
+          </svg>
+        </div>
+
+        {/* Navigation Items - Center */}
+        <div className="absolute left-1/2 transform -translate-x-1/2">
+          <div className="flex items-center gap-2 bg-white/10 rounded-full px-2 py-2 backdrop-blur-sm border border-white/20">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.name}
+                to={item.path}
+                className={({ isActive }) =>
+                  `px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                    isActive
+                      ? 'bg-[#fe7f2d] text-[#233d4d]'
+                      : 'text-white/90 hover:text-[#fe7f2d] hover:bg-white/10'
+                  }`
+                }
+              >
+                {item.name}
+              </NavLink>
+            ))}
+          </div>
+        </div>
+
+        {/* Contact Button - Right */}
+        <NavLink
+          to="/contact"
+          className="bg-[#fe7f2d] text-white px-8 py-3 rounded-full font-medium hover:bg-[#ff9051] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+        >
+          Contact Us
+        </NavLink>
+      </div>
     </nav>
   );
-};
+}
 
 export default Navbar;
